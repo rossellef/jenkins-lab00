@@ -27,7 +27,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Exécution des tests simulés...'
-                sh 'test -f build/resultat.txt && echo "Test OK"'
+                sh 'test -f build/resultat.txt && echo "Test terminé"'
             }
         }
     }
