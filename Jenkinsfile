@@ -12,7 +12,7 @@ pipeline {
         stage('Test') {
             steps {
                 dir ('demo-app') {
-                    echo '✅ Tests unitaires...'
+                    echo '✅ Tests unitaires... '
                     sh 'mvn test'
                 }
             }
