@@ -1,4 +1,4 @@
-package com.gfptech;s
+package com.gfptech;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
