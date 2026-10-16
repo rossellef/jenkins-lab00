@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+
+    parameters {
+        choice(name: 'DEPLOY_ENV', choices: ['DEV', 'TEST', 'PROD'])
+        string(name: 'SOURCE_BUILD', defaultValue: 'lastSuccessfulBuild')
+    }
+
+    stages {
+        stage('Téléchargement artefacts') {
+            steps {
+                script {
+                    // URL des artefacts du job Build-App
+                    def artifactUrl = "${JENKINS_URL}/job/Build-App/${params.SOURCE_BUILD}/artifact/build/info.txt"
+
+                    echo "Téléchargement depuis : ${artifactUrl}"
+
+                    sh """
+                        mkdir -p build
+                        curl -s -o build/info.txt "${artifactUrl}"
+                    """
+
+                    sh 'cat build/info.txt'
+                }
+            }
+        }
+
+        stage('Déploiement') {
+            steps {
+                echo "Déploiement sur ${params.DEPLOY_ENV}"
+            }
+        }
+    }
+}
